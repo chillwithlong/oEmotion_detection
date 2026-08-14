@@ -1,3 +1,5 @@
+
+# Final Project: Emotion Detector with Watson NLP
 # Emotion Detection Application
 
 This repository contains an AI-based web application built with Python, Flask, and the Watson NLP library for detecting emotions from text.
