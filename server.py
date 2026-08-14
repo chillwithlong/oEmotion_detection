@@ -6,13 +6,25 @@ app = Flask("Emotion Detector")
 @app.route("/emotionDetector")
 def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
+    
+    # Nếu chưa nhập gì hoặc text rỗng
+    if not text_to_analyze:
+        return "Invalid text! Please try again!"
+        
     response = emotion_detector(text_to_analyze)
     
-    return f"For the given statement, the system response is 'anger': {response['anger']}, 'disgust': {response['disgust']}, 'fear': {response['fear']}, 'joy': {response['joy']} and 'sadness': {response['sadness']}. The dominant emotion is {response['dominant_emotion']}."
+    # Trường hợp trả về kết quả thành công
+    return (
+        f"For the given statement, the system response is "
+        f"'anger': {response['anger']}, 'disgust': {response['disgust']}, "
+        f"'fear': {response['fear']}, 'joy': {response['joy']} and "
+        f"'sadness': {response['sadness']}. "
+        f"The dominant emotion is {response['dominant_emotion']}."
+    )
 
 @app.route("/")
 def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
